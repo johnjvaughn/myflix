@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.4.1'
 
 gem 'bootstrap-sass', '3.1.1.1'
 gem 'coffee-rails'
-gem 'rails', '4.1.1'
+gem 'rails' # , '4.1.14.1'
 gem 'haml-rails'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
+gem 'eventmachine', :platforms => :ruby
+gem 'tzinfo-data'
 
 group :development do
   gem 'thin'
@@ -19,7 +21,7 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
-  gem 'rspec-rails', '2.99'
+  gem 'rspec-rails', '3.7.2'#, '2.99'
 end
 
 group :test do
