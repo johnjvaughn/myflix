@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/codahale/bcrypt-ruby.git
+  revision: f2db689ba567d1a018f4dacb1ccf909adc93e887
+  specs:
+    bcrypt (3.1.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,6 +53,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
+    bootstrap_form (2.7.0)
     builder (3.2.3)
     coderay (1.1.2)
     coffee-rails (4.2.2)
@@ -80,6 +87,7 @@ GEM
       haml (>= 4.0.6, < 6.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    hirb (0.7.3)
     html2haml (2.2.0)
       erubis (~> 2.7.0)
       haml (>= 4.0, < 6)
@@ -211,13 +219,16 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  bcrypt!
   better_errors
   binding_of_caller
   bootstrap-sass (= 3.1.1.1)
+  bootstrap_form
   coffee-rails
   database_cleaner (= 1.4.1)
   eventmachine
   haml-rails
+  hirb
   jquery-rails
   pg
   pry
