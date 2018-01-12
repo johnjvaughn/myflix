@@ -8,6 +8,8 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
+    @review = Review.new
+    @reviews = @video.reviews.sort_by{|review| review.created_at}.reverse
   end
 
   def search

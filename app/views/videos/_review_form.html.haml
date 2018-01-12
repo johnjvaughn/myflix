@@ -1,0 +1,14 @@
+= bootstrap_form_for @review do |f|
+  %fieldset
+    .form-group
+      .row
+        .col-sm-3
+          = f.select :rating, rating_options, label: "Rate this video"
+    .form-group
+      .row
+        .col-sm-8
+          = f.text_area :content, label: "Write Review", rows: 6
+  %fieldset.actions.form-group.clearfix
+    = f.hidden_field :video_id, value: @video.id
+    %input(type="submit" value="Submit" class="btn")
+    %a Cancel

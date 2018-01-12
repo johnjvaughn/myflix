@@ -12,7 +12,6 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'eventmachine', :platforms => [:ruby, :x64_mingw]
 gem 'tzinfo-data'
-# gem 'bcrypt-ruby', '3.1.2'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt', platforms: [:x64_mingw, :mingw]
 
 group :development do
@@ -32,6 +31,9 @@ group :test do
   gem 'database_cleaner', '1.4.1'
   gem 'shoulda-matchers', '2.7.0'
   gem 'vcr', '2.9.3'
+  gem 'rails-controller-testing'
+  gem 'fabrication'
+  gem 'faker'
 end
 
 group :production do

@@ -6,8 +6,14 @@
       .video_info.col-sm-3
         %header
           %h3= @video.title
-          %span Rating: 4.5/5.0
+          %span= average_rating(@video)
         %p= @video.description
         .actions
           %a.btn.btn-primary Watch Now
           %a.btn.btn-default +My Queue
+
+%section.reviews.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      = render :partial => "videos/review_form"
+      = render :partial => "videos/reviews"
