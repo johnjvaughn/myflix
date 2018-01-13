@@ -15,6 +15,8 @@ Myflix::Application.routes.draw do
   resources :sessions, only: [:create]
   resources :reviews, only: [:create]
   
+  resources :queue_items, only: [:index, :create, :destroy], path: "my_queue"
+
   get '/genres/:id', to: 'categories#show', as: :category
   get 'ui(/:action)', controller: 'ui'
 end

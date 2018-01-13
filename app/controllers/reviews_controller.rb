@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
     else
       flash[:error] = "Review could not be saved."
       @video = @review.video
-      @reviews = @video.reviews.reload.sort_by{|review| review.created_at}.reverse
+      @reviews = @video.reviews.reload #.sort_by{|review| review.created_at}.reverse
       render "/videos/show"
     end
   end
