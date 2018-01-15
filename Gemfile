@@ -10,7 +10,7 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
-gem 'eventmachine', :platforms => [:ruby, :x64_mingw]
+gem 'eventmachine' #, :platforms => [:ruby, :x64_mingw]
 gem 'tzinfo-data'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt', platforms: [:x64_mingw, :mingw]
 
@@ -18,13 +18,13 @@ group :development do
   gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'hirb'
 end
 
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '3.7.2'#, '2.99'
-  gem 'hirb'
 end
 
 group :test do
@@ -34,6 +34,8 @@ group :test do
   gem 'rails-controller-testing'
   gem 'fabrication'
   gem 'faker'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :production do
