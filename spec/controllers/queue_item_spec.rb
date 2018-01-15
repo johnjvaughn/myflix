@@ -129,4 +129,57 @@ describe QueueItemsController do
     end
   end
 
+  describe "PUT update_queue" do
+    context "authenticated user" do
+      let(:user) { Fabricate(:user) }
+      let(:videos) { [Fabricate(:video), Fabricate(:video)] }
+      let(:qis) { [QueueItem.create(sort_order: 18, user: user, video: videos[0]),
+                   QueueItem.create(sort_order: 15, user: user, video: videos[1])] }
+      before do
+        session[:user_id] = user.id
+      end
+      context "valid data" do
+        it "changes queue item sort order correctly" do
+          put :update_queue, params: { queue_items: 
+            [{id: "#{qis[0].id}", sort_order: "3"}, 
+             {id: "#{qis[1].id}", sort_order: "2"}] }
+          qis.each {|q| q.reload }
+          expect(qis[0].sort_order).to eq(2)
+          expect(qis[1].sort_order).to eq(1)
+        end
+      end
+      context "invalid data" do
+        it "will not change sort order of queue items user does not own" do
+          user2 = Fabricate(:user)
+          other_qi = QueueItem.create(sort_order: 7, user: user2, video: videos[0])
+          put :update_queue, params: { 
+            queue_items: [{id: "#{other_qi.id}", sort_order: "3"}] }
+          other_qi.reload
+          expect(other_qi.sort_order).to eq(7)
+        end
+      end
+    end
+    context "inauthenticated user" do
+      let(:user) { Fabricate(:user) }
+      let(:videos) { [Fabricate(:video), Fabricate(:video)] }
+      let(:qis) { [QueueItem.create(sort_order: 18, user: user, video: videos[0]),
+                   QueueItem.create(sort_order: 15, user: user, video: videos[1])] }
+      before do
+        session[:user_id] = nil
+        # put :update_queue, params: {queue_sort_order: {"#{qis[0].id}": 3, "#{qis[1].id}": 2}}
+        put :update_queue, params: { queue_items: 
+            [{id: "#{qis[0].id}", sort_order: "3"}, 
+             {id: "#{qis[1].id}", sort_order: "2"}] }
+      end
+      it "does not update any queue items" do
+        qis.each{ |q| q.reload }
+        expect(qis[0].sort_order).to eq(18)
+        expect(qis[1].sort_order).to eq(15)
+      end
+      it "redirects to sign_in page" do
+        expect(response).to redirect_to(sign_in_path)
+      end
+    end
+  end
+
 end

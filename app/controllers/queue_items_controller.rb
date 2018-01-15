@@ -17,11 +17,17 @@ class QueueItemsController < ApplicationController
     redirect_to queue_items_path, notice: "Video was added to your queue."
   end
 
+  def update_queue
+    current_user.update_sort_orders(params[:queue_items])
+    current_user.update_ratings(params[:queue_items])
+    redirect_to queue_items_path, notice: "Queue was updated."
+  end
+
   def destroy
     qi = QueueItem.find(params[:id])
     if qi && current_user.queue_items.include?(qi)
       qi.destroy
-      reorder_items
+      current_user.normalize_queue_item_order
       flash[:notice] = "Video was removed from your queue."
     end 
     redirect_to queue_items_path
@@ -31,13 +37,6 @@ class QueueItemsController < ApplicationController
 
   def video_in_user_queue?(video)
     current_user.queue_items.map(&:video).include?(video)
-  end
-
-  def reorder_items
-    current_user.queue_items.each_with_index do |qi, index|
-      qi.sort_order = index + 1
-      qi.save
-    end
   end
 
 end
